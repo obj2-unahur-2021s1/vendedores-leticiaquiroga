@@ -22,12 +22,13 @@ abstract class Vendedor {
     certificaciones.add(certificacion)
   }
 
-  fun esFirme() = this.puntajeCertificaciones() >= 60
+  fun esFirme() = this.puntajeCertificaciones() >= 30
 
   fun certificacionesDeProducto() = certificaciones.count { it.esDeProducto }
   fun otrasCertificaciones() = certificaciones.count { !it.esDeProducto }
 
   fun puntajeCertificaciones() = certificaciones.sumBy { c -> c.puntaje }
+
 }
 
 // En los parámetros, es obligatorio poner el tipo

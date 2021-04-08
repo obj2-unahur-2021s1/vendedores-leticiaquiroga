@@ -36,4 +36,20 @@ class VendedorTest : DescribeSpec({
       }
     }
   }
+
+  describe("comercio corresponsal") {
+
+    val cordoba = Provincia(2000000)
+    val carlosPaz = Ciudad(cordoba)
+    val comercioCorresponsal = ComercioCorresponsal(listOf(carlosPaz))
+
+    describe("puedeTrabajarEn") {
+      it("una ciudad que pertenece a una provincia habilitada") {
+        comercioCorresponsal.puedeTrabajarEn(sanIgnacio).shouldBeFalse()
+      }
+      it("una ciudad que no pertenece a una provincia habilitada") {
+        comercioCorresponsal.puedeTrabajarEn(carlosPaz).shouldBeTrue()
+      }
+    }
+  }
 })
