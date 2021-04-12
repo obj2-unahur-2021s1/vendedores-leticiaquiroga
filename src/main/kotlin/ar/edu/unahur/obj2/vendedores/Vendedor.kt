@@ -62,6 +62,6 @@ class ComercioCorresponsal(val ciudades: List<Ciudad>) : Vendedor() {
   //debe tener sucursales en al menos 5 ciudades,
   // o bien en al menos 3 provincias considerando la provincia de cada ciudad donde tiene sucursal.
   override fun esInfluyente(): Boolean {
-    return ciudades.count ()>= 5
+    return ciudades.count ()>= 5 || ciudades.map {c->c.provincia }.toSet().size > 3
   }
 }
