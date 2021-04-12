@@ -22,7 +22,7 @@ abstract class Vendedor {
     certificaciones.add(certificacion)
   }
 
-  fun esFirme() = this.puntajeCertificaciones() >= 30
+  fun esFirme() = this.puntajeCertificaciones() >= 70
 
   fun certificacionesDeProducto() = certificaciones.count { it.esDeProducto }
   fun otrasCertificaciones() = certificaciones.count { !it.esDeProducto }
