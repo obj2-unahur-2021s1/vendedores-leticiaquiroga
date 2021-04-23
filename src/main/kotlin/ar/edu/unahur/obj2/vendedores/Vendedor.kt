@@ -22,7 +22,7 @@ abstract class Vendedor {
     certificaciones.add(certificacion)
   }
 
-  fun esFirme() = this.puntajeCertificaciones() >= 70
+  fun esFirme() = this.puntajeCertificaciones() >= 30
 
   fun certificacionesDeProducto() = certificaciones.count { it.esDeProducto }
   fun otrasCertificaciones() = certificaciones.count { !it.esDeProducto }
@@ -30,6 +30,7 @@ abstract class Vendedor {
   fun puntajeCertificaciones() = certificaciones.sumBy { c -> c.puntaje }
 
   abstract fun esInfluyente(): Boolean
+  fun esGenerico()= this.otrasCertificaciones()>0
 
 }
 
