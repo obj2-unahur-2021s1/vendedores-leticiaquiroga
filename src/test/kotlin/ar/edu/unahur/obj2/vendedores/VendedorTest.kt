@@ -11,6 +11,7 @@ class VendedorTest : DescribeSpec({
   describe("Vendedor fijo") {
     val obera = Ciudad(misiones)
     val vendedorFijo = VendedorFijo(obera)
+//    val agregarCertificacion(cerTi01)
 
     describe("puedeTrabajarEn") {
       it("su ciudad de origen") {
@@ -20,20 +21,69 @@ class VendedorTest : DescribeSpec({
         vendedorFijo.puedeTrabajarEn(sanIgnacio).shouldBeFalse()
       }
     }
+    describe("es Versatil") {
+      it("su ciudad de origen") {
+        vendedorFijo.esVersatil().shouldBeFalse()
+      }
+    }
+    describe("es influyente") {
+      it("su ciudad de origen") {
+        vendedorFijo.esInfluyente().shouldBeFalse()
+      }
+    }
+
   }
 
   describe("Viajante") {
-    val cordoba = Provincia(2000000)
+    val cordoba = Provincia(10000000)
     val villaDolores = Ciudad(cordoba)
-    val viajante = Viajante(listOf(misiones))
+    val viajante = Viajante(listOf(cordoba))
+
+    describe("puedeTrabajarEn") {
+      it("una ciudad que no pertenece a una provincia habilitada") {
+        viajante.puedeTrabajarEn(sanIgnacio).shouldBeFalse()
+      }
+      it("una ciudad que si pertenece a una provincia habilitada") {
+        viajante.puedeTrabajarEn(villaDolores).shouldBeTrue()
+      }
+    }
+    describe("es influyente") {
+      it("la población total debe ser de 10 millones o superior") {
+        viajante.esInfluyente().shouldBeTrue()
+      }
+    }
+  }
+
+  describe("comercio corresponsal") {
+
+    val cordoba = Provincia(2000000)
+    val sanjuan = Provincia(100000)
+    val chubut = Provincia(30000)
+    val santafe = Provincia(2500000)
+    val buenosaires = Provincia(4000000)
+
+    val carlosPaz = Ciudad(cordoba)
+    val rodeo = Ciudad(sanjuan)
+    val bariloche = Ciudad(chubut)
+    val rosario = Ciudad(santafe)
+    val hurlingham = Ciudad(buenosaires)
+
+    val comercioCorresponsal = ComercioCorresponsal(listOf(carlosPaz,rodeo,bariloche,rosario,hurlingham))
+    //val comercioCorresponsal = ComercioCorresponsal(listOf(rosario,rafaela,SanFrancisco,Diamante))
 
     describe("puedeTrabajarEn") {
       it("una ciudad que pertenece a una provincia habilitada") {
-        viajante.puedeTrabajarEn(sanIgnacio).shouldBeTrue()
+        comercioCorresponsal.puedeTrabajarEn(sanIgnacio).shouldBeFalse()
       }
       it("una ciudad que no pertenece a una provincia habilitada") {
-        viajante.puedeTrabajarEn(villaDolores).shouldBeFalse()
+        comercioCorresponsal.puedeTrabajarEn(carlosPaz).shouldBeTrue()
       }
     }
+    describe("es influyente") {
+      it("su ciudad de origen") {
+        comercioCorresponsal.esInfluyente().shouldBeTrue()
+      }
+    }
+
   }
 })
